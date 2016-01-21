@@ -1,7 +1,7 @@
 .wrapper {
 	border: 1px solid silver;
 	width: 70%;
-	height: 520px;
+	height: 570px;
 	margin: 10px auto;
 	padding: 5px;
 }
@@ -9,7 +9,7 @@
 .view {
 	border: 1px solid silver;
 	width: 84%;
-	height: 450px;
+	height: 500px;
 	float: left;
 	margin-bottom: 10px;
 	overflow: hidden;
@@ -18,7 +18,7 @@
 .control {
 	border: 1px solid silver;
 	width: 15%;
-	height: 450px;
+	height: 500px;
 	float: right;
 }
 
@@ -48,9 +48,13 @@
 	margin-top: 100px;
 }
 
-
+.output {
+	border: 1px solid silver;
+	width: 95%;
+	margin: 5px auto;
+	height: 150px;
+}
 
 .img {
 	background: #D3CFCF url("../img/suite.png") no-repeat;
-	background-size: cover;
 }
