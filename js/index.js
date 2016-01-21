@@ -33,18 +33,15 @@
             return suite;
         },
         Card: function (n, width) {
-            this.id = n * width;
-            this.y = this.id + 2;
-            this.x = this.y - this.id - 1;
+            this.id = n;
+            this.dx = n * width;
         }
     };
     model.Card.prototype.make = function() {
         var img = global.image.cloneNode();
         var cont = document.createElement('div');
-        cont.style.width = '101px';
-        cont.style.height = '150px';
-        //cont.style.background = '#D3CFCF url("../img/suite.png") no-repeat';
         cont.classList.add('img');
+        cont.style.backgroundPosition = -this.dx + 'px 0px';
         return cont;
     };
 
@@ -61,8 +58,19 @@
         },
         showCards: function () {
             var set = this.cardSet();
-            var card = set[1].make();
-            global.view.querySelector('.output').appendChild(card);
+            var card, i, row = 0, b = 0;
+            var pos = 0;
+            var cont = global.view.querySelectorAll('.output');
+            for (i = 0; i < cont.length; i += 1) {
+                for (var j = b; j < 7 + b; j++) {
+                    card = set[j].make();
+                    card.style.left = pos + 'px';
+                    cont[i].appendChild(card);
+                    pos += 65;
+                }
+                b += 7;
+                pos = 0;
+            }
         }
     };
 
@@ -70,13 +78,10 @@
         init: function () {
             global.start.onclick = function () {
                 global.wellcome = global.tip.removeChild(wellcome);
-                /*self.vw.appendChild(model.image.cloneNode(true));
-                self.vw.appendChild(model.image.cloneNode(true));*/
-                console.log(global);
             };
         }
     };
 
     controller.init();
-    console.log(view.showCards());
+    view.showCards();
 }());
