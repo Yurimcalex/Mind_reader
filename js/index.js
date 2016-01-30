@@ -7,7 +7,8 @@
         next: document.getElementById('next'),
         view: document.getElementById('vw'),
         tip: document.getElementById('tips'),
-        btns: document.getElementById('sel').querySelectorAll('button'),
+        btns: document.getElementById('sel'),
+        cardRows: document.querySelectorAll('.output'),
         image: (function () {
             var img = new Image();
             img.src = 'img/suite.png';
@@ -76,7 +77,7 @@
             set = set || this.cardSet();
             var card, i, j, b = 0;
             var pos = 0;
-            var cont = global.view.querySelectorAll('.output');
+            var cont = global.cardRows;
             for (i = 0; i < cont.length; i += 1) {
                 for (j = b; j < 7 + b; j += 1) {
                     card = set[j].make();
@@ -87,37 +88,24 @@
                 b += 7;
                 pos = 0;
             }
-            global.cardRows = cont;
-            global.suite = set;
+            return set;
         },
         showCardsInRows: function (cards, flag) {
-            var suite, tstSuite;
-            var makeSteps = function (show) {
-                if (controller.times === 2) {
-                    show = view.showRezult;
-                }
-                suite = model.laySuiteIn3rows(tstSuite);
-                tstSuite = suite.row1.concat(suite.row2).concat(suite.row3);
-                show(tstSuite);
-                global.suite = suite;
-            };
-            if (!flag) {
-                suite = model.laySuiteIn3rows(cards);
-                tstSuite = suite.row1.concat(suite.row2).concat(suite.row3);
-                view.showCards(tstSuite);
-                global.suite = suite;
+            var suite, inRows;
+            if (flag === 'top') {
+                suite = cards.row2.concat(cards.row1).concat(cards.row3);
+            } else if (flag === 'center') {
+                suite = cards.row1.concat(cards.row2).concat(cards.row3);
             } else {
-                if (flag === 'top') {
-                    tstSuite = cards.row2.concat(cards.row1).concat(cards.row3);
-                    makeSteps(view.showCards);
-                }
-                else if (flag === 'center') {
-                    tstSuite = cards.row1.concat(cards.row2).concat(cards.row3);
-                    makeSteps(view.showCards);
-                } else if (flag === 'bottom') {
-                    tstSuite = cards.row1.concat(cards.row3).concat(cards.row2);
-                    makeSteps(view.showCards);
-                }
+                suite = cards.row1.concat(cards.row3).concat(cards.row2);
+            }
+            inRows = model.laySuiteIn3rows(suite);
+            global.suite = inRows;
+            inRows = inRows.row1.concat(inRows.row2).concat(inRows.row3);
+            if (controller.times === 2) {
+                view.showRezult(inRows);
+            } else {
+                view.showCards(inRows);
             }
         },
         showRezult: function () {
@@ -138,7 +126,7 @@
                 if (!controller.startFlag) {
                     var i;
                     global.view.removeChild(global.view.querySelector('p'));
-                    view.showCards();
+                    global.suite = view.showCards();
                     for (i = 0; i < 3; i += 1) {
                         global.cardRows[i].removeAttribute('hidden');
                     }
@@ -150,34 +138,33 @@
             global.next.onclick = function () {
                 var suite;
                 if (controller.startFlag && !controller.nextFlag) {
-                    view.showCardsInRows(global.suite);
+                    suite = model.laySuiteIn3rows(global.suite);
+                    global.suite = suite;
+                    suite = suite.row1.concat(suite.row2).concat(suite.row3);
+                    view.showCards(suite);
                     global.tip.innerHTML = '<p>In which row is your card? Press:top/center/bottom</p>';
                     controller.selFlag = true;
                     controller.nextFlag = true;
                 }
+                
             };
 
-            global.btns[0].onclick = function () {
-                var suite;
+            global.btns.addEventListener('click', function (e) {
+                var target = e.target;
+                var btn;
+                var cls = target.getAttribute('class');
+                if (cls === 'le') {
+                    btn = 'top';
+                } else if (cls === 'ce') {
+                    btn = 'center';
+                } else {
+                    btn = 'bottom';
+                }
                 if (controller.selFlag && controller.times < 3) {
-                    view.showCardsInRows(global.suite, 'top');
+                    view.showCardsInRows(global.suite, btn);
                     controller.times += 1;
                 }
-            };
-            global.btns[1].onclick = function () {
-                var suite;
-                if (controller.selFlag && controller.times < 3) {
-                    view.showCardsInRows(global.suite, 'center');
-                    controller.times += 1;
-                }
-            };
-            global.btns[2].onclick = function () {
-                var suite;
-                if (controller.selFlag && controller.times < 3) {
-                    view.showCardsInRows(global.suite, 'bottom');
-                    controller.times += 1;
-                }
-            };
+            }, false);
         }
     };
     controller.init();
