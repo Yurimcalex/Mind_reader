@@ -1,7 +1,7 @@
 .wrapper {
 	border: 1px solid silver;
-	width: 70%;
-	height: 570px;
+	width: 60%;
+	height: 550px;
 	margin: 10px auto;
 	padding: 5px;
 }
@@ -12,11 +12,13 @@
 	height: 500px;
 	float: left;
 	margin-bottom: 10px;
+	background-image: url("../img/bg.png");
 	overflow: hidden;
 }
 
 .control {
 	border: 1px solid silver;
+	background-color: #3A3838;
 	width: 15%;
 	height: 500px;
 	float: right;
@@ -24,12 +26,33 @@
 
 .tips {
 	clear: both;
-	height: 50px;
+	height: 35px;
 	border: 1px solid silver;
+	background-color: #3A3838;
+	color: white;
 }
 
 #sel {
-	margin-top: 60px;
+	margin-top: 90px;
+}
+
+#vw {
+	position: relative;
+}
+
+#vw p {
+	position: absolute;
+	top: 200px;
+	left: 50px;
+	font-size: 2em;
+	font-style: italic;
+}
+
+#tips p {
+	font-style: italic;
+	font-size: 1.2em;
+	width: 60%;
+	margin: 5px auto;
 }
 
 .control button {
@@ -45,13 +68,12 @@
 }
 
 #next {
-	margin-top: 100px;
+	margin-top: 130px;
 }
 
 .output {
-	border: 1px solid silver;
-	width: 95%;
-	margin: 5px auto;
+	width: 85%;
+	margin: 10px auto;
 	height: 150px;
 	position: relative;
 }

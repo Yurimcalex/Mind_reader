@@ -114,6 +114,7 @@
                 global.cardRows[i].innerHTML = '';
             }
             var rez = global.suite.row2[3].make();
+            rez.style.marginLeft = '40%';
             global.cardRows[1].appendChild(rez);
             global.tip.innerHTML = '<p>Its your card?</p>';
         }
@@ -142,7 +143,7 @@
                     global.suite = suite;
                     suite = suite.row1.concat(suite.row2).concat(suite.row3);
                     view.showCards(suite);
-                    global.tip.innerHTML = '<p>In which row is your card? Press:top/center/bottom</p>';
+                    global.tip.innerHTML = '<p>In which row is your card? Press: top/center/bottom</p>';
                     controller.selFlag = true;
                     controller.nextFlag = true;
                 }
