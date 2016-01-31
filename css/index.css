@@ -1,39 +1,21 @@
 .wrapper {
 	border: 1px solid silver;
+	border-radius: 7px;
 	width: 60%;
-	height: 550px;
+	padding: 5px;
 	margin: 10px auto;
 	padding: 5px;
 }
 
+/*------------------veiw block-----------------*/
 .view {
-	border: 1px solid silver;
+	border-radius: 5px 0 0 0;
 	width: 84%;
 	height: 500px;
 	float: left;
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 	background-image: url("../img/bg.png");
 	overflow: hidden;
-}
-
-.control {
-	border: 1px solid silver;
-	background-color: #3A3838;
-	width: 15%;
-	height: 500px;
-	float: right;
-}
-
-.tips {
-	clear: both;
-	height: 35px;
-	border: 1px solid silver;
-	background-color: #3A3838;
-	color: white;
-}
-
-#sel {
-	margin-top: 90px;
 }
 
 #vw {
@@ -48,11 +30,27 @@
 	font-style: italic;
 }
 
-#tips p {
-	font-style: italic;
-	font-size: 1.2em;
-	width: 60%;
-	margin: 5px auto;
+.output {
+	width: 85%;
+	margin: 10px auto;
+	height: 150px;
+	position: relative;
+}
+
+/*--------------end veiw block-----------------*/
+/*---------------control block-----------------*/
+
+.control {
+	border-radius: 0 5px 0 0;
+	background-color: #3A3838;
+	background: linear-gradient(to bottom, #d5cea6 0%,#c9c190 40%,#b7ad70 100%);
+	width: 16%;
+	height: 500px;
+	float: right;
+}
+
+#sel {
+	margin-top: 90px;
 }
 
 .control button {
@@ -70,14 +68,27 @@
 #next {
 	margin-top: 130px;
 }
+/*-----------end control block-----------------*/
+/*------------------tips block-----------------*/
 
-.output {
-	width: 85%;
-	margin: 10px auto;
-	height: 150px;
-	position: relative;
+.tips {
+	border-radius: 0 0 5px 5px;
+	clear: both;
+	height: 35px;
+	background-color: #3A3838;
+	color: white;
 }
 
+
+#tips p {
+	font-style: italic;
+	font-size: 1.2em;
+	width: 60%;
+	margin: 5px auto;
+}
+
+/*--------------end tips block-----------------*/
+/*----------- used in js block-----------------*/
 .img {
 	width: 101px;
 	height: 150px;
