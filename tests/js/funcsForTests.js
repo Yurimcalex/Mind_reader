@@ -13,3 +13,12 @@ function isUniqueArrayElements(arr) {
     }
     return true;
 }
+
+function isEqualArr(arr, arrIsEq) {
+    var i;
+    if (arrIsEq.length !== arr.length) return false;
+    for (i = 0; i < arr.length; i += 1) {
+        if (arr[i] !== arrIsEq[i]) return false;
+    }
+    return true;
+}
