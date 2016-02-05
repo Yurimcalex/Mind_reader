@@ -2,7 +2,15 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
+    <style type="text/css">
+        #st {
+            width: 200px;
+            margin: 0 auto;
+            color: red;
+        }
+    </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>
 
     <script>
@@ -16,6 +24,30 @@
     </script>
 </head>
 <body>
+    <div class="wrapper">
+        <div id="vw" class="view">
+            <p>Press START and look down to tips</p>
+            <div class="output" hidden></div>
+            <div class="output" hidden></div>
+            <div class="output" hidden></div>
+        </div>
+        <div class="control">
+            <button id="start">START</button>
+            <div id="sel">
+                <button class="le">TOP</button>
+                <button class="ce">CENTER</button>
+                <button class="ri">BOTTOM</button>
+            </div>
+            <button id="next">NEXT</button>
+        </div>
+        <div id="tips" class="tips">
+        </div>
+    </div>
+    <hr/>
+    <h2 id="st">Tests start here</h2>
+    <hr/>
+
+    <script src="js/index.js"></script>
     <script src="js/funcsForTests.js"></script>
 
     <script src="js/testsForTestsFuncs.js"></script>
