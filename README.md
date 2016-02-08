@@ -1,3 +1,5 @@
+---The game engin will be realize on HTML5 canvas---
+
 This is the card game.
 User memorizes a card and computer guesses this card.
 
