@@ -92,10 +92,21 @@
         showCards: function () {
             var set = this.cardSet();
             var jump = 0;
-            for (var i = 0; i < 7; i += 1) {
+            var i1 = 0, i2 = 0;
+            for (var i = 0; i < 21; i += 1) {
                 if (i % 2 === 0) jump = 5;
                 else jump = -5;
-                set[i].make(9 + 84 * i, 10 + jump);
+
+                if (i < 7) {
+                    set[i].make(9 + 84 * i, 15 + jump);
+                } else if (i >= 7 && i < 14) {
+                    set[i].make(9 + 84 * i1, 15 + jump + 180);
+                    i1++;
+                }
+                else {
+                    set[i].make(9 + 84 * i2, 15 + jump + 360);
+                    i2++;
+                }
             }
         },
         showCardsInRows: function (cards, flag) {
