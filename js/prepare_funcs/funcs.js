@@ -1,21 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Canvas</title>
-	<style>
-		canvas {border: 1px solid silver;} 
-	</style>
-</head>
-<body>
-	<canvas width="700" height="600" id="canv"></canvas>
-	<script>
-	var canvas = document.getElementById('canv');
-	var ctx = canvas.getContext('2d');
+var br = 10, // radius of corners
+	h = 170, // card height
+	w = 120; // card width
 
-	var br = 10, // radius of corners
-		h = 150, // card height
-		w = 100; // card width
+	function testCircle(x, y, r) {
+		ctx.beginPath();
+		ctx.arc(x, y, r, 0, 2 * Math.PI, true);
+		ctx.stroke();
+	}
 
 	function darwFrame(x, y) {
 		ctx.fillStyle = "#EDEAEA";
@@ -35,20 +26,17 @@
 		//ctx.stroke();
 }
 
-	function darwChirva(x, y) {
+	function darwHeart(x, y, r) {
 		ctx.fillStyle = "red";
 		// find senter of card
 		var cx = x + w / 2,
 			cy = y + h / 2,
-			r = h / 8,
+			r = r || h / 8,
 			dy = 0.25 * r,
 			dx = Math.sqrt(r * r - dy * dy),
 			r1 = dx / 2;
 
-		//test circle
-		ctx.beginPath();
-		//ctx.arc(cx, cy, r, 0, 2 * Math.PI, true);
-		ctx.stroke();
+		//testCircle(cx, cy, r); //test circle
 
 		// draw upper half circles
 		var ux = [cx - r1, cx + r1];
@@ -66,20 +54,14 @@
 		ctx.fill();
 	}
 
-	darwFrame(100, 100);
-	darwChirva(100, 100);
-
-	function drawBuba(x, y) {
+	function drawDiamond(x, y, r) {
 		// find senter of card
 		ctx.fillStyle = "red";
 		var cx = x + w / 2,
 			cy = y + h / 2,
-			r = h / 8;
+			r = r || h / 8;
 
-		//test circle
-		ctx.beginPath();
-		//ctx.arc(cx, cy, r, 0, 2 * Math.PI, true);
-		ctx.stroke();
+		//testCircle(cx, cy, r); //test circle
 
 		ctx.beginPath();
 		ctx.moveTo(cx, cy - r);
@@ -90,24 +72,18 @@
 		ctx.fill();
 	}
 
-	darwFrame(250, 100);
-	drawBuba(250, 100);
-
-	function drawKrest(x, y) {
+	function drawClub(x, y, r) {
 		// find senter of card
 		ctx.fillStyle = "black";
 		var cx = x + w / 2,
 			cy = y + h / 2,
-			r = h / 8,
+			r = r || h / 8,
 			r1 = r / 2.5, // radius of cicles
 			// centre of cicles
 			xc = [cx, cx + r / 2.2, cx - r / 2.2],
 			yc = [cy - r + r / 2.2, cy + r / 7, cy + r / 7];
 
-		//test circle
-		ctx.beginPath();
-		//ctx.arc(cx, cy, r, 0, 2 * Math.PI, true);
-		ctx.stroke();
+		//testCircle(cx, cy, r); //test circle
 
 		// draw circles
 		for (var i = 0; i < 3; i += 1) {
@@ -126,23 +102,15 @@
 		ctx.fill();
 	}
 
-	darwFrame(100, 300);
-	drawKrest(100, 300);
-
-	function drawWine(x, y) {
+	function drawSpade(x, y, r) {
 		// find senter of card
 		ctx.fillStyle = "black";
 		var cx = x + w / 2,
 			cy = y + h / 2,
-			r = h / 8,
+			r = r || h / 8,
 			dy = 0.25 * r,
 			dx = Math.sqrt(r * r - dy * dy),
 			r1 = dx / 2;
-
-		//test circle
-		ctx.beginPath();
-		//ctx.arc(cx, cy, r, 0, 2 * Math.PI, true);
-		ctx.stroke();
 
 		// draw upper half circles
 		var ux = [cx - r1, cx + r1];
@@ -167,10 +135,51 @@
 		ctx.lineTo(cx - r + r / 2, by);
 		ctx.quadraticCurveTo(cx, by, cx, cy);
 		ctx.fill();
+
+		//testCircle(cx, cy, r); //test circle
 	}
 
-	darwFrame(250, 300);
-	drawWine(250, 300);
-	</script>
-</body>
-</html>
+	//-----------------------------------------------
+
+	function drawTextSymb(x , y, symb, func) {
+		var r = h / 10,
+			xt = x + r, // centre of top left circle
+			yt = y + r,
+			xb = x + w - r, // centre of bottom right circle
+			yb = y + h - r;
+
+		ctx.fillStyle = "black";
+		ctx.font = "bold " + r + "px Times New Roman";
+
+
+		ctx.fillText(symb, xt - r / 2, yt + r / 2); // top symb
+		ctx.fillText(symb, xb - r - r / 2, yb + r / 6); // bottom symb
+
+		func(xt - w / 2 + r, yt - h / 2 + r / 4, r / 2); //top suit
+		func(xb - w / 2, yb - h / 2 - r / 6, r / 2); // bottom suit
+
+		// test circles
+		//testCircle(xt + r, yt + r / 4, r / 2); // for suit top
+		//testCircle(xb, yb - r / 6, r / 2); // for suit bottom
+		//testCircle(xt, yt, r); // for symbol top
+		//testCircle(xb - r, yb, r); // for symbol bottom
+	}
+
+	function drawCard(x, y, suit, symb) {
+		darwFrame(x, y);
+		var f = null;
+		if (suit === 'heart') {
+			darwHeart(x, y);
+			f = darwHeart;
+		} else if (suit === 'diamond') {
+			drawDiamond(x, y);
+			f = drawDiamond;
+		} else if (suit === 'club') {
+			drawClub(x, y);
+			f = drawClub;
+		} else {
+			drawSpade(x, y);
+			f = drawSpade;
+		}
+		drawTextSymb(x , y, symb, f);
+	}
