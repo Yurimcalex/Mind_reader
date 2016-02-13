@@ -1,4 +1,6 @@
-var br = 10, // radius of corners
+var drawCards = function (x, y, suit, symb) {
+	'use strict';
+	var br = 10, // radius of corners
 	h = 170, // card height
 	w = 120; // card width
 
@@ -24,7 +26,7 @@ var br = 10, // radius of corners
 
 		ctx.fill();
 		//ctx.stroke();
-}
+	}
 
 	function darwHeart(x, y, r) {
 		ctx.fillStyle = "red";
@@ -183,3 +185,6 @@ var br = 10, // radius of corners
 		}
 		drawTextSymb(x , y, symb, f);
 	}
+
+	return drawCard(x, y, suit, symb);
+};

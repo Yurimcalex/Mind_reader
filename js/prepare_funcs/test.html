@@ -9,16 +9,16 @@
 </head>
 <body>
 	<canvas width="700" height="600" id="canv"></canvas>
-	<script src="funcs.js"></script>
+	<script src="moduleForCardsDrawning.js"></script>
 	<script>
 	var canvas = document.getElementById('canv');
 	var ctx = canvas.getContext('2d');
 
 	//tests
-	drawCard(100, 100, 'club', 'Д');
-	drawCard(250, 100, 'diamond', 'Д');
-	drawCard(100, 300, 'spade', 'Д');
-	drawCard(250, 300, 'heart', 'Д');
+	drawCards(100, 100, 'club', 'Д');
+	drawCards(250, 100, 'diamond', 'Д');
+	drawCards(100, 300, 'spade', 'Д');
+	drawCards(250, 300, 'heart', 'Д');
 	</script>
 </body>
 </html>
