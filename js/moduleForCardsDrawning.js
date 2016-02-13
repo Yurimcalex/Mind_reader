@@ -1,8 +1,8 @@
 var drawCards = function (x, y, suit, symb) {
 	'use strict';
 	var br = 10, // radius of corners
-	h = 170, // card height
-	w = 120; // card width
+	h = 160, // card height
+	w = 110; // card width
 
 	function testCircle(x, y, r) {
 		ctx.beginPath();

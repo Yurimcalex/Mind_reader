@@ -11,7 +11,7 @@
 .view {
 	border-radius: 5px 0 0 0;
 	width: 84%;
-	height: 500px;
+	height: 550px;
 	float: left;
 	margin-bottom: 0px;
 	background-color: black;
@@ -30,13 +30,6 @@
 	font-style: italic;
 }
 
-.output {
-	width: 85%;
-	margin: 10px auto;
-	height: 150px;
-	position: relative;
-}
-
 /*--------------end veiw block-----------------*/
 /*---------------control block-----------------*/
 
@@ -45,7 +38,7 @@
 	background-color: #3A3838;
 	background: linear-gradient(to bottom, #d5cea6 0%,#c9c190 40%,#b7ad70 100%);
 	width: 16%;
-	height: 500px;
+	height: 550px;
 	float: right;
 }
 

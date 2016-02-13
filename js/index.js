@@ -95,7 +95,7 @@
             for (var i = 0; i < 7; i += 1) {
                 if (i % 2 === 0) jump = 5;
                 else jump = -5;
-                set[i].make(10 + 78 * i, 10 + jump);
+                set[i].make(9 + 84 * i, 10 + jump);
             }
         },
         showCardsInRows: function (cards, flag) {
