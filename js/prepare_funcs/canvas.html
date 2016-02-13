@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas</title>
+	<style>
+		canvas {border: 1px solid silver;} 
+	</style>
+</head>
+<body>
+	<canvas width="700" height="600" id="canv"></canvas>
+	<script>
+	var canvas = document.getElementById('canv');
+	var ctx = canvas.getContext('2d');
+
+	var br = 10, // radius of corners
+		h = 150, // card height
+		w = 100; // card width
+
+	function darwFrame(x, y) {
+		ctx.fillStyle = "#EDEAEA";
+		// draw borders and corners
+		ctx.beginPath();
+		ctx.moveTo(x, y + br);
+		ctx.lineTo(x, y + h - br);
+		ctx.arcTo(x, y + h, x + br, y + h, br); // left bottom corner
+		ctx.lineTo(x + w - br, y + h);
+		ctx.arcTo(x + w, y + h, x + w, y + h - br, br); // right bottom corner
+		ctx.lineTo(x + w, y + br);
+		ctx.arcTo(x + w, y, x + w - br, y, br); // right top corner
+		ctx.lineTo(x + br, y);
+		ctx.arcTo(x, y, x, y + br, br); // left top corner
+
+		ctx.fill();
+		//ctx.stroke();
+}
+
+	function darwChirva(x, y) {
+		ctx.fillStyle = "red";
+		// find senter of card
+		var cx = x + w / 2,
+			cy = y + h / 2,
+			r = h / 8,
+			dy = 0.25 * r,
+			dx = Math.sqrt(r * r - dy * dy),
+			r1 = dx / 2;
+
+		//test circle
+		ctx.beginPath();
+		//ctx.arc(cx, cy, r, 0, 2 * Math.PI, true);
+		ctx.stroke();
+
+		// draw upper half circles
+		var ux = [cx - r1, cx + r1];
+		for (var i = 0; i < 2; i += 1) {
+			ctx.beginPath();
+			ctx.arc(ux[i], cy - dy, r1, 0, Math.PI, true);
+			ctx.fill();
+		};
+
+		// draw bottom part
+		ctx.beginPath();
+		ctx.moveTo(cx + dx, cy - dy);
+		ctx.bezierCurveTo(cx + r - r / 6, cy + r / 3, cx + r / 6, cy + r / 3, cx, cy + r - r / 5);
+		ctx.bezierCurveTo(cx - r / 6, cy + r / 3, cx - r + r / 6, cy + r / 3, cx - dx, cy - dy);
+		ctx.fill();
+	}
+
+	darwFrame(100, 100);
+	darwChirva(100, 100);
+
+	function drawBuba(x, y) {
+		// find senter of card
+		ctx.fillStyle = "red";
+		var cx = x + w / 2,
+			cy = y + h / 2,
+			r = h / 8;
+
+		//test circle
+		ctx.beginPath();
+		//ctx.arc(cx, cy, r, 0, 2 * Math.PI, true);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(cx, cy - r);
+		ctx.quadraticCurveTo(cx + r / 4, cy - r / 4, cx + r, cy);
+		ctx.quadraticCurveTo(cx + r / 4, cy + r / 4, cx, cy + r);
+		ctx.quadraticCurveTo(cx - r / 4, cy + r / 4, cx - r, cy);
+		ctx.quadraticCurveTo(cx - r / 4, cy - r / 4, cx, cy - r);
+		ctx.fill();
+	}
+
+	darwFrame(250, 100);
+	drawBuba(250, 100);
+
+	function drawKrest(x, y) {
+		// find senter of card
+		ctx.fillStyle = "black";
+		var cx = x + w / 2,
+			cy = y + h / 2,
+			r = h / 8,
+			r1 = r / 2.5, // radius of cicles
+			// centre of cicles
+			xc = [cx, cx + r / 2.2, cx - r / 2.2],
+			yc = [cy - r + r / 2.2, cy + r / 7, cy + r / 7];
+
+		//test circle
+		ctx.beginPath();
+		//ctx.arc(cx, cy, r, 0, 2 * Math.PI, true);
+		ctx.stroke();
+
+		// draw circles
+		for (var i = 0; i < 3; i += 1) {
+			ctx.beginPath();
+			ctx.arc(xc[i], yc[i], r1, 0, 2 * Math.PI, true);
+			ctx.fill();
+		}
+
+		// draw bottom element
+		var by = cy + Math.sqrt(r * r - Math.pow(r - r / 2, 2));
+		ctx.beginPath();
+		ctx.moveTo(cx, cy);
+		ctx.quadraticCurveTo(cx, by, cx + r - r / 2, by);
+		ctx.lineTo(cx - r + r / 2, by);
+		ctx.quadraticCurveTo(cx, by, cx, cy);
+		ctx.fill();
+	}
+
+	darwFrame(100, 300);
+	drawKrest(100, 300);
+
+	function drawWine(x, y) {
+		// find senter of card
+		ctx.fillStyle = "black";
+		var cx = x + w / 2,
+			cy = y + h / 2,
+			r = h / 8,
+			dy = 0.25 * r,
+			dx = Math.sqrt(r * r - dy * dy),
+			r1 = dx / 2;
+
+		//test circle
+		ctx.beginPath();
+		//ctx.arc(cx, cy, r, 0, 2 * Math.PI, true);
+		ctx.stroke();
+
+		// draw upper half circles
+		var ux = [cx - r1, cx + r1];
+		for (var i = 0; i < 2; i += 1) {
+			ctx.beginPath();
+			ctx.arc(ux[i], cy + dy, r1, 0, Math.PI, false);
+			ctx.fill();
+		};
+
+		// draw bottom part
+		ctx.beginPath();
+		ctx.moveTo(cx + dx, cy + dy);
+		ctx.bezierCurveTo(cx + r - r / 6, cy - r / 3, cx + r / 6, cy - r / 3, cx, cy - r + r / 5);
+		ctx.bezierCurveTo(cx - r / 6, cy - r / 3, cx - r + r / 6, cy - r / 3, cx - dx, cy + dy);
+		ctx.fill();
+
+		// draw bottom element
+		var by = cy + Math.sqrt(r * r - Math.pow(r - r / 1.5, 2));
+		ctx.beginPath();
+		ctx.moveTo(cx, cy);
+		ctx.quadraticCurveTo(cx, by, cx + r - r / 2, by);
+		ctx.lineTo(cx - r + r / 2, by);
+		ctx.quadraticCurveTo(cx, by, cx, cy);
+		ctx.fill();
+	}
+
+	darwFrame(250, 300);
+	drawWine(250, 300);
+	</script>
+</body>
+</html>
