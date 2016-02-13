@@ -6,13 +6,13 @@
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
+
 	<div class="wrapper">
+
 		<div id="vw" class="view">
-			<p>Press START and look down to tips</p>
-			<div class="output"></div>
-			<div class="output"></div>
-			<div class="output"></div>
+			<canvas id="canv"></canvas>
 		</div>
+
 		<div class="control">
 			<button id="start">START</button>
 			<div id="sel">
@@ -22,9 +22,19 @@
 			</div>
 			<button id="next">NEXT</button>
 		</div>
+
 		<div id="tips" class="tips">
+			<p>Press start for begin</p>
 		</div>
+
 	</div>
+
+	<script>
+		var canvas = document.getElementById('canv');
+		var ctx = canvas.getContext('2d');
+	</script>
+
+	<script src="js/moduleForCardsDrawning.js"></script>
 	<script src="js/index.js"></script>
 </body>
 </html>

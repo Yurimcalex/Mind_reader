@@ -12,6 +12,8 @@ var drawCards = function (x, y, suit, symb) {
 
 	function darwFrame(x, y) {
 		ctx.fillStyle = "#EDEAEA";
+		ctx.strokeStyle = "silver";
+		ctx.lineWidth = "2";
 		// draw borders and corners
 		ctx.beginPath();
 		ctx.moveTo(x, y + br);
@@ -25,7 +27,7 @@ var drawCards = function (x, y, suit, symb) {
 		ctx.arcTo(x, y, x, y + br, br); // left top corner
 
 		ctx.fill();
-		//ctx.stroke();
+		ctx.stroke();
 	}
 
 	function darwHeart(x, y, r) {

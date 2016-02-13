@@ -6,13 +6,25 @@
         start: document.getElementById('start'),
         next: document.getElementById('next'),
         view: document.getElementById('vw'),
+        canvas: document.getElementById('canv'),
         tip: document.getElementById('tips'),
         btns: document.getElementById('sel'),
-        cardRows: document.querySelectorAll('.output'),
-        image: (function () {
-            var img = new Image();
-            img.src = 'img/suite.png';
-            return img;
+        set: (function () {
+            var symbs = ['6', '7', '8', '9', '10', 'В', 'Д', 'К', 'Т'];
+            var suits = ['club', 'diamond', 'spade', 'heart'];
+            var set = [];
+            var counter = 0;
+            for (var i = 0; i < suits.length; i++) {
+                var suit = suits[i];
+                for (var j = 0; j < symbs.length; j++) {
+                    var card = {};
+                    card.id = counter++;
+                    card.suit = suit;
+                    card.symb = symbs[j];
+                    set.push(card);
+                };
+            };
+            return set;
         }())
     };
 
@@ -21,18 +33,18 @@
             y = y - 1;
             return Math.floor(Math.random() * y + x);
         },
-        makeSuite: function () {
-            var suite = [], n;
+        makeSet: function () {
+            var set = [], n;
             while (true) {
                 n = this.randomNumber(0, 35);
-                if (suite.indexOf(n) === -1) {
-                    suite.push(n);
+                if (set.indexOf(n) === -1) {
+                    set.push(n);
                 }
-                if (suite.length === 21) {
+                if (set.length === 21) {
                     break;
                 }
             }
-            return suite;
+            return set;
         },
         laySuiteIn3rows: function (suite) {
             var row1 = [], row2 = [], row3 = [];
@@ -50,16 +62,15 @@
             rez.push(row3);
             return rez
         },
-        Card: function (n, width) {
-            this.id = n;
-            this.dx = n * width;
+        Card: function (n) {
+            this.props = global.set[n];
         }
     };
-    model.Card.prototype.make = function () {
-        var cont = document.createElement('div');
-        cont.classList.add('img');
-        cont.style.backgroundPosition = -this.dx + 'px 0px';
-        return cont;
+    model.Card.prototype.make = function (x, y) {
+        var suit = this.props.suit,
+            symb = this.props.symb;
+
+        drawCards(x, y, suit, symb);
     };
     model.Card.prototype.binds = function (cont, card, time) {
         setTimeout(function() {
@@ -70,30 +81,22 @@
 
     view = {
         cardSet: function () {
-            var suite = [];
-            var set = model.makeSuite();
+            var suits = [];
+            var set = model.makeSet();
             var i;
             for (i = 0; i < set.length; i += 1) {
-                suite.push(new model.Card(set[i], 100));
+                suits.push(new model.Card(set[i]));
             }
-            return suite;
+            return suits;
         },
-        showCards: function (set) {
-            set = set || this.cardSet();
-            var card, i, j, b = 0;
-            var pos = 0;
-            var cont = global.cardRows;
-            for (i = 0; i < cont.length; i += 1) {
-                for (j = b; j < 7 + b; j += 1) {
-                    card = set[j].make();
-                    card.style.left = pos + 'px';
-                    cont[i].appendChild(card);
-                    pos += 65;
-                }
-                b += 7;
-                pos = 0;
+        showCards: function () {
+            var set = this.cardSet();
+            var jump = 0;
+            for (var i = 0; i < 7; i += 1) {
+                if (i % 2 === 0) jump = 5;
+                else jump = -5;
+                set[i].make(10 + 78 * i, 10 + jump);
             }
-            return set;
         },
         showCardsInRows: function (cards, flag) {
             if (controller.times < 2) {
@@ -130,10 +133,14 @@
     controller = {
         times: 0,
         init: function () {
+                var vw = global.view,
+                    canvas = global.canvas;
+
+                canvas.width = vw.offsetWidth;
+                canvas.height = vw.offsetHeight;
+
             global.start.onclick = function () {
                 if (!controller.startFlag) {
-                    var i;
-                    global.view.removeChild(global.view.querySelector('p'));
                     global.suite = view.showCards();
                     global.tip.innerHTML = '<p>Remember a card and press NEXT</p>';
                 }
@@ -181,4 +188,5 @@
         }
     };
     controller.init();
+    //console.log(global.set);
 }());
