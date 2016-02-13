@@ -38,17 +38,17 @@
             var row1 = [], row2 = [], row3 = [];
             var len = suite.length;
             var count = 0;
-            var rez = {};
+            var rez = [];
             while (count < len) {
                 row1.push(suite[count]);
                 row2.push(suite[count + 1]);
                 row3.push(suite[count + 2]);
                 count += 3;
             }
-            rez.row1 = row1;
-            rez.row2 = row2;
-            rez.row3 = row3;
-            return rez;
+            rez.push(row1);
+            rez.push(row2);
+            rez.push(row3);
+            return rez
         },
         Card: function (n, width) {
             this.id = n;
@@ -61,6 +61,11 @@
         cont.style.backgroundPosition = -this.dx + 'px 0px';
         return cont;
     };
+    model.Card.prototype.binds = function (cont, card, time) {
+        setTimeout(function() {
+            cont.appendChild(card);
+        }, time);
+    }
 
 
     view = {
@@ -91,32 +96,34 @@
             return set;
         },
         showCardsInRows: function (cards, flag) {
-            var suite, inRows;
-            if (flag === 'top') {
-                suite = cards.row2.concat(cards.row1).concat(cards.row3);
-            } else if (flag === 'center') {
-                suite = cards.row1.concat(cards.row2).concat(cards.row3);
+            if (controller.times < 2) {
+                var containers = global.cardRows;
+                var sets = global.suite;
+                var pos = 0;
+                var time = 0;
+                for (var i = 0; i < 3; i++) {
+                    var cont = containers[i];
+                    cont.innerHTML = '';
+                    var set = sets[i];
+                    for (var j = 0; j < 7; j++) {
+                        var card = set[j].make();
+                        card.style.top = pos + 'px';
+                        set[j].binds(cont, card, time);
+                        pos += 55;
+                        time += 500;
+                    }
+                    pos = 0;
+                }
             } else {
-                suite = cards.row1.concat(cards.row3).concat(cards.row2);
+                var i;
+                for (i = 0; i < global.cardRows.length; i += 1) {
+                    global.cardRows[i].innerHTML = '';
+                }
+                var rez = global.suite[1][3].make();
+                rez.style.marginTop = '150px';
+                global.cardRows[1].appendChild(rez);
+                global.tip.innerHTML = '<p>Its your card?</p>';
             }
-            inRows = model.laySuiteIn3rows(suite);
-            global.suite = inRows;
-            inRows = inRows.row1.concat(inRows.row2).concat(inRows.row3);
-            if (controller.times === 2) {
-                view.showRezult(inRows);
-            } else {
-                view.showCards(inRows);
-            }
-        },
-        showRezult: function () {
-            var i;
-            for (i = 0; i < global.cardRows.length; i += 1) {
-                global.cardRows[i].innerHTML = '';
-            }
-            var rez = global.suite.row2[3].make();
-            rez.style.marginLeft = '40%';
-            global.cardRows[1].appendChild(rez);
-            global.tip.innerHTML = '<p>Its your card?</p>';
         }
     };
 
@@ -128,9 +135,6 @@
                     var i;
                     global.view.removeChild(global.view.querySelector('p'));
                     global.suite = view.showCards();
-                    for (i = 0; i < 3; i += 1) {
-                        global.cardRows[i].removeAttribute('hidden');
-                    }
                     global.tip.innerHTML = '<p>Remember a card and press NEXT</p>';
                 }
                 controller.startFlag = true;
@@ -139,32 +143,40 @@
             global.next.onclick = function () {
                 var suite;
                 if (controller.startFlag && !controller.nextFlag) {
+                    for (var i = 0; i < global.cardRows.length; i++) {
+                        global.cardRows[i].classList.add('output_next');
+                    }
                     suite = model.laySuiteIn3rows(global.suite);
                     global.suite = suite;
-                    suite = suite.row1.concat(suite.row2).concat(suite.row3);
-                    view.showCards(suite);
-                    global.tip.innerHTML = '<p>In which row is your card? Press: top/center/bottom</p>';
+                    view.showCardsInRows(suite);
+                    global.tip.innerHTML = '<p>In which column is your card? Press: left/center/right</p>';
                     controller.selFlag = true;
                     controller.nextFlag = true;
+                    
                 }
-                
             };
 
             global.btns.addEventListener('click', function (e) {
-                var target = e.target;
-                var btn;
-                var cls = target.getAttribute('class');
-                if (cls === 'le') {
-                    btn = 'top';
-                } else if (cls === 'ce') {
-                    btn = 'center';
-                } else {
-                    btn = 'bottom';
-                }
                 if (controller.selFlag && controller.times < 3) {
-                    view.showCardsInRows(global.suite, btn);
+                    var set = global.suite;
+                    var target = e.target;
+                    var btn;
+                    var cls = target.getAttribute('class');
+                    if (cls === 'le') {
+                        var col = set[0];
+                        set[0] = set[1];
+                        set[1] = col;
+                    } else if (cls === 'ri') {
+                        var col = set[1];
+                        set[1] = set[2];
+                        set[2] = col;
+                    }
+                    var suite = model.laySuiteIn3rows(set[0].concat(set[1]).concat(set[2]));
+                    global.suite = suite;
+                    view.showCardsInRows(suite);
                     controller.times += 1;
                 }
+                
             }, false);
         }
     };
