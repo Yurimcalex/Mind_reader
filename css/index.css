@@ -35,15 +35,30 @@
 
 .control {
 	border-radius: 0 5px 0 0;
-	background-color: #3A3838;
-	background: linear-gradient(to bottom, #d5cea6 0%,#c9c190 40%,#b7ad70 100%);
+	background-color: #4D1D56;
+	/*background: linear-gradient(to bottom, #d5cea6 0%,#c9c190 40%,#b7ad70 100%);*/
 	width: 16%;
 	height: 550px;
 	float: right;
 }
 
+.contr_bord {
+	border: 2px solid silver;
+	border-radius: 0 5px 0 0;
+}
+
 #sel {
-	margin-top: 90px;
+	margin-top: 135px;
+}
+
+#sel button {
+	border: 2px solid #EEEAEF;
+	border-radius: 6px;
+	background-color: #F5F2F2;
+}
+
+#sel button.btns_bord {
+	border-color: red;
 }
 
 .control button {
@@ -58,8 +73,25 @@
 	width: 90%;
 }
 
+#start {
+	border: 2px solid #EEEAEF;
+	border-radius: 6px;
+	background-color: #F5F2F2;
+}
+
+#start.btns_bord {
+	border-color: red;
+}
+
 #next {
 	margin-top: 130px;
+	border: 2px solid #EEEAEF;
+	border-radius: 6px;
+	background-color: #F5F2F2;
+}
+
+#next.btns_bord {
+	border-color: red;
 }
 /*-----------end control block-----------------*/
 /*------------------tips block-----------------*/
