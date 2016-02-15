@@ -1,0 +1,15 @@
+.tips {
+	border-radius: 0 0 5px 5px;
+	clear: both;
+	height: 35px;
+	background-color: #3A3838;
+	color: white;
+}
+
+
+#tips p {
+	font-style: italic;
+	font-size: 1.2em;
+	width: 60%;
+	margin: 5px auto;
+}
