@@ -167,13 +167,22 @@
     };
 
     controller = {
-        times: 0,
-        startBtns: false,
-        sameBtn: false,
+        times: 0, // flag for cards shuffling
+        startBtns: false, // flag using for enables press button only after previous operation done
+        makeBtnBlink: function(btn, classB, time) { // make blink border of battons
+            var h = setInterval(function() {
+                btn.classList.toggle(classB);
+            }, time);
+            return h;
+        },
         init: function () {
-            var t = 0;
+            var t = 0; // for interval in that card shown in lays
+            // clear canvas before lays
+            view.clearCanvas(); 
+            // timers for all buttons
+            var hs, hn, hl, hc, hr; // hs - start, hn - next, hl - left, hc - center, hr - right
 
-            view.clearCanvas();
+            hs = controller.makeBtnBlink(global.start, 'btns_bord', 500);
 
             global.start.onclick = function () {
                 if (!controller.startFlag) {
@@ -181,10 +190,18 @@
                     global.tip.innerHTML = '<p>Remember a card and press NEXT</p>';
                 }
                 controller.startFlag = true;
+                clearInterval(hs);
+                global.start.classList.remove('btns_bord');
+
+                hn = controller.makeBtnBlink(global.next, 'btns_bord', 500);
             };
 
             global.next.onclick = function () {
                 var suite;
+
+                clearInterval(hn);
+                global.next.classList.remove('btns_bord');
+
                 if (controller.startFlag && !controller.nextFlag) {
 
                     canvas.width = vw.offsetWidth;
@@ -195,13 +212,27 @@
                     t = view.showCardsInRows(suite);
                     global.tip.innerHTML = '<p>In which column is your card? Press: left/center/right</p>';
 
+                    global.start.classList.remove('btns_bord');
                     setTimeout(function () {
                         controller.startBtns = true;
                     }, t * 21 + 200);
 
                     controller.selFlag = true;
                     controller.nextFlag = true;
+
+                    var btns = global.btns.children;
+
+                    var timers = [hl, hc, hr];
+                    for (var i = 0; i < btns.length; i++) {
+                        (function(i) {
+                            setTimeout(function () {
+                                timers[i] = controller.makeBtnBlink(btns[i], 'btns_bord', 700);
+                            }, t * 21 + 200 + 300 * i);
+                        })(i);
+                    };
+
                 }
+
             };
 
             global.btns.addEventListener('click', function (e) {
@@ -232,6 +263,15 @@
                         setTimeout(function () {
                             controller.startBtns = true;
                         }, t * 21 + 200);
+                    }
+
+                    if (controller.times === 3) {
+                        clearInterval(hl);
+                        clearInterval(hc);
+                        clearInterval(hb);
+                        for (var i = 0; i < global.btns.children.length; i++) {
+                            global.btns.children[i].classList.remove('btns_bord');
+                        };
                     }
                 }
 
