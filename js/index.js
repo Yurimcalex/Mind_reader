@@ -180,7 +180,7 @@
             // clear canvas before lays
             view.clearCanvas(); 
             // timers for all buttons
-            var hs, hn, hl, hc, hr; // hs - start, hn - next, hl - left, hc - center, hr - right
+            var hs, hn, hl, hc, hr, ts; // hs - start, hn - next, hl - left, hc - center, hr - right
 
             hs = controller.makeBtnBlink(global.start, 'btns_bord', 500);
 
@@ -222,15 +222,14 @@
 
                     var btns = global.btns.children;
 
-                    var timers = [hl, hc, hr];
+                    ts = [hl, hc, hr];
                     for (var i = 0; i < btns.length; i++) {
                         (function(i) {
                             setTimeout(function () {
-                                timers[i] = controller.makeBtnBlink(btns[i], 'btns_bord', 700);
+                                ts[i] = controller.makeBtnBlink(btns[i], 'btns_bord', 700);
                             }, t * 21 + 200 + 300 * i);
                         })(i);
                     };
-
                 }
 
             };
@@ -266,9 +265,9 @@
                     }
 
                     if (controller.times === 3) {
-                        clearInterval(hl);
-                        clearInterval(hc);
-                        clearInterval(hb);
+                        clearInterval(ts[0]);
+                        clearInterval(ts[1]);
+                        clearInterval(ts[2]);
                         for (var i = 0; i < global.btns.children.length; i++) {
                             global.btns.children[i].classList.remove('btns_bord');
                         };
