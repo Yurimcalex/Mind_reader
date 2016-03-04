@@ -88,6 +88,35 @@ describe('laySetIn3rows - lay pack of cards on three rows', function() {
     });
 });
 
+describe('makeRowsDisplacement - displacements rows correspont to pressed button', function() {
+    var set = [[2, 27, 22, 6, 28, 7, 17], [0, 15, 31, 26, 14, 13, 8], [11, 21, 12, 32, 5, 29, 24]];
+    var makeRowsDisplacement = function (btn, set) {
+        var newSet;
+        if (btn === 'left') {
+            newSet = set[1].concat(set[0]).concat(set[2]);
+        } else if (btn === 'center') {
+            newSet = set[0].concat(set[1]).concat(set[2]);
+        } else {
+            newSet = set[0].concat(set[2]).concat(set[1]);
+        }
+        return newSet;
+    }
+    it('test set of rows : [[2, 27, 22, 6, 28, 7, 17], [0, 15, 31, 26, 14, 13, 8], [11, 21, 12, 32, 5, 29, 24]];', function () {
+    });
+    it('when left button pressed change places first and second rows', function () {
+        var newSet = makeRowsDisplacement('left', set);
+        assert.equal(newSet[0], 0);
+    });
+    it('when center button pressed places of rows not changed', function () {
+        var newSet = makeRowsDisplacement('center', set);
+        assert.equal(newSet[0], 2);
+    });
+    it('when right button pressed change places third and second rows', function () {
+        var newSet = makeRowsDisplacement('right', set);
+        assert.equal(newSet[7], 11);
+    });
+});
+
 var pack = [];
 describe('makePack - makes pack of cards', function() {
     var makePack = function () {
