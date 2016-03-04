@@ -3,6 +3,7 @@
     var model, view, controller, global;
 
     global = {
+        suite: null,
         start: document.getElementById('start'), // link on start btn
         next: document.getElementById('next'), // link on next btn
         view: document.getElementById('vw'), // link on view container in which placed canvas elmnt
@@ -27,6 +28,7 @@
                 };
 
             };
+            console.log(set);
             return set;
         }())
     };
@@ -92,8 +94,8 @@
             }
             return suits;
         },
-        showCards: function (set) { // display random 21 cards
-            var set = set || this.cardSet();
+        showCards: function () { // display random 21 cards
+            var set = this.cardSet();
             var jump = 0;
             var i1 = 0, i2 = 0;
             var time = 0;
@@ -134,13 +136,13 @@
             this.clearCanvas(); // clear area before displaying
 
             if (controller.times < 2) {
-                var sets = global.suite;
+                //var sets = global.suite;
                 var time = 0, dt = 500;
                 var xc = 50;
                 var yc = 100;
 
                 for (var i = 0; i < 3; i += 1) {
-                    var set = sets[i];
+                    var set = global.suite[i];
 
                     for (var j = 0; j < 7; j += 1) {
                         set[j].make(xc + layEffects(j), yc, time);
@@ -242,18 +244,23 @@
                         var target = e.target;
                         var btn;
                         var cls = target.getAttribute('class');
+                        var setCards = [];
                         // cheking which of #sel btns was pressed, make transposition of it
                         if (cls === 'le') {
-                            var col = set[0];
-                            set[0] = set[1];
-                            set[1] = col;
+                            //var col = set[0];
+                            //set[0] = set[1];
+                            //set[1] = col;
+                            setCards = set[1].concat(set[0]).concat(set[2]);
                         } else if (cls === 'ri') {
-                            var col = set[1];
-                            set[1] = set[2];
-                            set[2] = col;
+                            //var col = set[1];
+                            //set[1] = set[2];
+                            //set[2] = col;
+                            setCards = set[0].concat(set[2]).concat(set[1]);
+                        } else {
+                            setCards = set[0].concat(set[1]).concat(set[2]);
                         }
                         // collect cards for displaying
-                        var suite = model.laySuiteIn3rows(set[0].concat(set[1]).concat(set[2]));
+                        var suite = model.laySuiteIn3rows(setCards);
                         global.suite = suite;
                         view.showCardsInRows(suite);
                         controller.times += 1;
