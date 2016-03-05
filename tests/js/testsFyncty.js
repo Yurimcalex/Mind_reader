@@ -93,11 +93,11 @@ describe('makeRowsDisplacement - displacements rows correspont to pressed button
     var makeRowsDisplacement = function (btn, set) {
         var newSet;
         if (btn === 'left') {
-            newSet = set[1].concat(set[0]).concat(set[2]);
+            newSet = [set[1], set[0], set[2]];
         } else if (btn === 'center') {
-            newSet = set[0].concat(set[1]).concat(set[2]);
+            newSet = [set[0], set[1], set[2]];
         } else {
-            newSet = set[0].concat(set[2]).concat(set[1]);
+            newSet = [set[0], set[2], set[1]];
         }
         return newSet;
     }
@@ -105,15 +105,15 @@ describe('makeRowsDisplacement - displacements rows correspont to pressed button
     });
     it('when left button pressed change places first and second rows', function () {
         var newSet = makeRowsDisplacement('left', set);
-        assert.equal(newSet[0], 0);
+        assert.equal(newSet[0][0], 0);
     });
     it('when center button pressed places of rows not changed', function () {
         var newSet = makeRowsDisplacement('center', set);
-        assert.equal(newSet[0], 2);
+        assert.equal(newSet[0][0], 2);
     });
     it('when right button pressed change places third and second rows', function () {
         var newSet = makeRowsDisplacement('right', set);
-        assert.equal(newSet[7], 11);
+        assert.equal(newSet[1][0], 11);
     });
 });
 
