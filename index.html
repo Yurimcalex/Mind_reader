@@ -1,43 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Magic guesser</title>
-	<link rel="stylesheet" type="text/css" href="css/index.css">
-</head>
-<body>
-
-	<div class="wrapper">
-
-		<div id="vw" class="view">
-			<canvas id="canv"></canvas>
-		</div>
-
-		<div class="control">
-			<div class="contr_bord">
-				<button id="start">START</button>
-				<div id="sel">
-					<button class="left">LEFT</button>
-					<button class="center">CENTER</button>
-					<button class="right">RIGHT</button>
-				</div>
-				<button id="next">NEXT</button>
-			</div>
-		</div>
-
-		<div id="tips" class="tips">
-			<p>Press start to begin</p>
-		</div>
-
-	</div>
-
-	<script>
-		var canvas = document.getElementById('canv');
-		var ctx = canvas.getContext('2d');
-	</script>
-
-	<script src="js/moduleForCardsDrawning.js"></script>
-	<script src="js/index_anotherCodeOrg.js"></script>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
