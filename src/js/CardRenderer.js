@@ -1,7 +1,6 @@
 export default class CardRenderer {
-	constructor() {
-		this.canvas = document.getElementById('canv');
-		this.ctx = this.canvas.getContext('2d');
+	constructor(ctx) {
+		this.ctx = ctx;
 		this.br = 10; // a radius of corners
 		this.h = 160; // a card height
 		this.w = 110; // a card width
