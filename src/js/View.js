@@ -42,7 +42,7 @@ export default class View {
 		}
 	}
 
-	displayCardsInPiles(piles, attempt) {
+	displayCardsInPiles(piles) {
 		const calcXShift = function(n) {
 		  let result = 0, d = 0;
 		  if (n === 2 || n === 6) d = 10;
@@ -53,33 +53,32 @@ export default class View {
 		  return result + d;
 		}
 
-		if (attempt < 2) {
-				const dt = 500;
-		    let delay = 0, xc = 50, yc = 100;
+		const dt = 500;
+		let delay = 0, xc = 50, yc = 100;
 
-		    for (let i = 0; i < 3; i += 1) {
-		        let set = piles[i];
+		for (let i = 0; i < 3; i += 1) {
+		  let set = piles[i];
 		        
-		        for (let j = 0; j < 7; j += 1) {
-		        		const card = set[j];
-		        		const x = xc + calcXShift(j);
-		            const y = yc;
+		  for (let j = 0; j < 7; j += 1) {
+		    const card = set[j];
+		    const x = xc + calcXShift(j);
+		    const y = yc;
 		            
-		            setTimeout(() => {
-		            	this.cardRenderer.draw(x, y, card.suit, card.rank);
-		            }, delay);
+		    setTimeout(() => {
+		      this.cardRenderer.draw(x, y, card.suit, card.rank);
+		    }, delay);
 		            
-		            yc += 20;
-		            delay += dt;
-		        }
-		        yc = 100;
-		        xc += 200;
-		    }
-
-		} else {
-			const card = piles[1][3];
-			this.cardRenderer.draw(250, 200, card.suit, card.rank);
+		    yc += 20;
+		    delay += dt;
+		  }
+		  yc = 100;
+		  xc += 200;
 		}
+	}
+
+	displayCard(piles) {
+		const card = piles[1][3];
+		this.cardRenderer.draw(250, 200, card.suit, card.rank);
 	}
 
 	showMessage(text) {

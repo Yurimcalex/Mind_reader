@@ -34,7 +34,13 @@ export default class Game {
 		this.cardPiles = this.deck.shiftPiles(this.cardPiles, pressedBtn);
 		this.setCards(this.cardPiles);
 		this.cardPiles = this.deck.layOut3(this.cards);
-		this.view.displayCardsInPiles(this.cardPiles, this.counter);
+
+		if (this.counter < 2) {
+			this.view.displayCardsInPiles(this.cardPiles);
+		} else {
+			this.view.displayCard(this.cardPiles);
+		}
+		
 		this.counter += 1;
 	}
 }
