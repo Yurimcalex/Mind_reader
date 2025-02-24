@@ -76,7 +76,7 @@ export default class View {
 		    }
 
 		} else {
-			const card = set[1][3];
+			const card = piles[1][3];
 			this.cardRenderer.draw(250, 200, card.suit, card.rank);
 		}
 	}
