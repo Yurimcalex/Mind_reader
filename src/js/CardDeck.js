@@ -35,10 +35,10 @@ export default class CardDeck {
 					pile3 = [];
 		let counter = 0;
 		while (counter < set.length) {
-			pile1.push(set[count]);
-			pile2.push(set[count + 1]);
-			pile3.push(set[count + 2]);
-			count += 3;
+			pile1.push(set[counter]);
+			pile2.push(set[counter + 1]);
+			pile3.push(set[counter + 2]);
+			counter += 3;
 		}
 		return [pile1, pile2, pile3];
 	}
