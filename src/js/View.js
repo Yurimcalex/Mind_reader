@@ -6,6 +6,7 @@ export default class View {
 		this.canvas = document.getElementById('canv');
 		this.ctx = this.canvas.getContext('2d');
 		this.cardRenderer = new CardRenderer(this.ctx);
+		this.message = document.getElementById('tips').children[0];
 		this.reset();
 	}
 
@@ -79,5 +80,9 @@ export default class View {
 			const card = piles[1][3];
 			this.cardRenderer.draw(250, 200, card.suit, card.rank);
 		}
+	}
+
+	showMessage(text) {
+		this.message.textContent = text;
 	}
 }

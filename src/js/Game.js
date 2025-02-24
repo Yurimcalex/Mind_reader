@@ -3,8 +3,8 @@ import View from './View.js';
 
 
 export default class Game {
-	constructor() {
-		this.view = new View();
+	constructor(view) {
+		this.view = view;
 		this.deck = new CardDeck();
 		this.cards = [];
 		this.cardPiles = [];
