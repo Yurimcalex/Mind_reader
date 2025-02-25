@@ -1,24 +1,30 @@
+body {
+	padding: 0;
+	margin: 0;
+}
+
+* {
+	box-sizing: border-box;
+}
+
 .wrapper {
-	border: 1px solid silver;
-	border-radius: 7px;
-	width: 60%;
-	padding: 5px;
-	margin: 10px auto;
-	padding: 5px;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: rgb(26,28,29);
+	background: radial-gradient(circle, rgba(26,28,29,1) 8%, rgba(41,49,56,1) 94%); 
 }
 
 /*------------------veiw block-----------------*/
 .view {
-	border-radius: 5px 0 0 0;
-	width: 84%;
+	width: 80%;
+	max-width: 900px; 
 	height: 550px;
-	float: left;
-	margin-bottom: 0px;
-	background-color: black;
-	overflow: hidden;
+	background: lightgray;
 }
 
-#vw {
+/*#vw {
 	position: relative;
 }
 
@@ -28,18 +34,19 @@
 	left: 50px;
 	font-size: 2em;
 	font-style: italic;
-}
+}*/
 
 /*--------------end veiw block-----------------*/
 /*---------------control block-----------------*/
 
 .control {
-	border-radius: 0 5px 0 0;
-	background-color: #4D1D56;
+	display: none;
+	/*border-radius: 0 5px 0 0;
+	background-color: #4D1D56;*/
 	/*background: linear-gradient(to bottom, #d5cea6 0%,#c9c190 40%,#b7ad70 100%);*/
-	width: 16%;
+	/*width: 16%;
 	height: 550px;
-	float: right;
+	float: right;*/
 }
 
 .contr_bord {
@@ -97,6 +104,7 @@
 /*------------------tips block-----------------*/
 
 .tips {
+	display: none;
 	border-radius: 0 0 5px 5px;
 	clear: both;
 	height: 35px;
@@ -113,10 +121,3 @@
 }
 
 /*--------------end tips block-----------------*/
-/*----------- used in js block-----------------*/
-.img {
-	width: 101px;
-	height: 150px;
-	background: #D3CFCF url("../img/suite.png") no-repeat;
-	position: absolute;
-}
