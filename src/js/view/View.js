@@ -8,6 +8,7 @@ export default class View {
 		this.cardRenderer = new CardRenderer(this.ctx);
 		this.message = document.getElementById('tips').children[0];
 		this.reset();
+		this.animationDone = true;
 	}
 
 	reset() {
@@ -19,7 +20,10 @@ export default class View {
 	displayCards(set) {
 		let topShift = 0,  
 				leftShift = 0,
-				delay = 25;
+				delay = 25,
+				counter = 0;
+
+		this.animationDone = false;
 		
 		for (let i = 0; i < set.length; i += 1) {
 			const card = set[i];
@@ -37,12 +41,17 @@ export default class View {
      	leftShift += 1;
      	
      	setTimeout(() => {
+     		counter += 1;
      		this.cardRenderer.draw(x, y, card.suit, card.rank);
+     		if (counter === 21) this.animationDone = true;
      	}, delay);
 		}
 	}
 
 	displayCardsInPiles(piles) {
+		let counter = 0;
+		this.animationDone = false;
+
 		const calcXShift = function(n) {
 		  let result = 0, d = 0;
 		  if (n === 2 || n === 6) d = 10;
@@ -65,7 +74,9 @@ export default class View {
 		    const y = yc;
 		            
 		    setTimeout(() => {
+		    	counter += 1;
 		      this.cardRenderer.draw(x, y, card.suit, card.rank);
+		      if (counter === 21) this.animationDone = true;
 		    }, delay);
 		            
 		    yc += 20;

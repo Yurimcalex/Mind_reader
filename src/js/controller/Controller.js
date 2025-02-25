@@ -13,12 +13,14 @@ export default class Controller {
 
 	init() {
 		this.start.addEventListener('click', () => {
+			if (!this.game.view.animationDone) return;
 			this.game.init();
 			this.nextPressed = false;
 			this.counter = 0;
 		});
 
 		this.next.addEventListener('click', () => {
+			if (!this.game.view.animationDone) return;
 			if (!this.nextPressed) {
 				this.game.start();
 				this.nextPressed = true;
@@ -26,6 +28,7 @@ export default class Controller {
 		});
 
 		this.btns.addEventListener('click', (e) => {
+			if (!this.game.view.animationDone) return;
 			const btnType = e.target.getAttribute('class');
 			if (this.nextPressed && this.counter < 3) {
 				this.game.next(btnType);
