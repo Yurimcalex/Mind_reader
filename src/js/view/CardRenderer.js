@@ -27,8 +27,15 @@ export default class CardRenderer {
 		ctx.arcTo(x + w, y, x + w - br, y, br); // the right top corner
 		ctx.lineTo(x + br, y);
 		ctx.arcTo(x, y, x, y + br, br); // the left top corner
-		ctx.fill();
+
+		ctx.save();
+		ctx.shadowBlur = 3; 
+		ctx.shadowColor = "black"; 
+		ctx.shadowOffsetX = 1; 
+		ctx.shadowOffsetY = 1;
 		ctx.stroke();
+		ctx.fill();
+		ctx.restore();
 	}
 
 	drawHeart(x, y, rs) {
