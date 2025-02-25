@@ -89,7 +89,7 @@ export default class View {
 
 	displayCard(piles) {
 		const card = piles[1][3];
-		this.cardRenderer.draw(250, 200, card.suit, card.rank);
+		this.cardRenderer.draw(350, 200, card.suit, card.rank);
 	}
 
 	showMessage(text) {
