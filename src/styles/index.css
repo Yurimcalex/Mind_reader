@@ -37,6 +37,13 @@ body {
 	width: 100%;
 }
 
+.wrapper__tips {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
 
 .view {
 	width: 100%;
@@ -93,7 +100,11 @@ body {
 	border-radius: 50%;
 }
 
-
 .tips {
-	display: none;
+	padding: 10px;
+	border-radius: 12px;
+	font-size: 25px;
+	background: rgba(0, 0, 0, .1);
+	color: rgba(255, 255, 255, .8);
+	text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.68);
 }
