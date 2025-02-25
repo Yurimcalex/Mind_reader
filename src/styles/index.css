@@ -39,7 +39,7 @@ body {
 
 .wrapper__tips {
 	position: absolute;
-	top: 50%;
+	top: 15%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
@@ -101,9 +101,9 @@ body {
 }
 
 .tips {
-	padding: 10px;
+	padding: 5px 15px;
 	border-radius: 12px;
-	font-size: 25px;
+	font-size: 20px;
 	background: rgba(0, 0, 0, .1);
 	color: rgba(255, 255, 255, .8);
 	text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.68);
