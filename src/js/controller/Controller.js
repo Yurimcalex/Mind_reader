@@ -29,7 +29,7 @@ export default class Controller {
 
 		this.btns.addEventListener('click', (e) => {
 			if (!this.game.view.animationDone) return;
-			const btnType = e.target.getAttribute('class');
+			const btnType = e.target.getAttribute('class').split(' ')[0];
 			if (this.nextPressed && this.counter < 3) {
 				this.game.next(btnType);
 				this.counter += 1;

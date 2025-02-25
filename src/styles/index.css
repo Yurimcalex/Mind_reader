@@ -61,75 +61,39 @@ body {
 	align-self: flex-end;
 }
 
-/*.contr_bord {
-	border: 2px solid silver;
-	border-radius: 0 5px 0 0;
+
+.btns {
+	width: 250px;
+	display: flex;
+	justify-content: space-between;
 }
 
-#sel {
-	margin-top: 135px;
+
+.btn {
+	padding: 6px 15px;
+	border: 1px solid #232523;
+	outline: none;
+	border-radius: 5px;
+	background: #0f110f;
+	color: white;
+	cursor: pointer;
+	box-shadow: 1px 1px 5px 3px rgba(0,0,0,0.75);
 }
 
-#sel button {
-	border: 2px solid #EEEAEF;
-	border-radius: 6px;
-	background-color: #F5F2F2;
+.btn:hover {
+	background: #131513;
+	color: lightgray;
+	transform: scale(1.03);
 }
 
-#sel button.btns_bord {
-	border-color: red;
+.btn_big {
+	width: 75px;
+	height: 75px;
+	border: 2px solid #333533;
+	border-radius: 50%;
 }
 
-.control button {
-	display: block;
-	width: 80%;
-	height: 40px;
-	margin: 10px auto;
-}
-
-.control button[id] {
-	height: 60px;
-	width: 90%;
-}
-
-#start {
-	border: 2px solid #EEEAEF;
-	border-radius: 6px;
-	background-color: #F5F2F2;
-}
-
-#start.btns_bord {
-	border-color: red;
-}
-
-#next {
-	margin-top: 130px;
-	border: 2px solid #EEEAEF;
-	border-radius: 6px;
-	background-color: #F5F2F2;
-}
-
-#next.btns_bord {
-	border-color: red;
-}*/
-/*-----------end control block-----------------*/
-/*------------------tips block-----------------*/
 
 .tips {
 	display: none;
-	border-radius: 0 0 5px 5px;
-	clear: both;
-	height: 35px;
-	background-color: #3A3838;
-	color: white;
 }
-
-
-/*#tips p {
-	font-style: italic;
-	font-size: 1.2em;
-	width: 60%;
-	margin: 5px auto;
-}*/
-
-/*--------------end tips block-----------------*/
