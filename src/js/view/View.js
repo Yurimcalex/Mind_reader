@@ -20,7 +20,7 @@ export default class View {
 	displayCards(set) {
 		let topShift = 0,  
 				leftShift = 0,
-				delay = 25,
+				delay = 0,
 				counter = 0;
 
 		this.animationDone = false;
@@ -35,8 +35,8 @@ export default class View {
 				leftShift = 0;
 			}    	
 
-     	delay += 25;
-     	x = 9 + 84 * leftShift; 
+     	delay += 75;
+     	x = 75 + 97 * leftShift; 
      	y = 15 + topShift;
      	leftShift += 1;
      	
