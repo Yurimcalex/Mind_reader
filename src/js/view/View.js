@@ -62,8 +62,8 @@ export default class View {
 		  return result + d;
 		}
 
-		const dt = 500;
-		let delay = 0, xc = 50, yc = 100;
+		const dt = 300;
+		let delay = 0, xc = 150, yc = 90;
 
 		for (let i = 0; i < 3; i += 1) {
 		  let set = piles[i];
@@ -79,10 +79,10 @@ export default class View {
 		      if (counter === 21) this.animationDone = true;
 		    }, delay);
 		            
-		    yc += 20;
+		    yc += 35;
 		    delay += dt;
 		  }
-		  yc = 100;
+		  yc = 90;
 		  xc += 200;
 		}
 	}
